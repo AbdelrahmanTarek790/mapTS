@@ -9,7 +9,7 @@ import { SetStateAction, useState } from "react"
 import Hidden from "./HiddenSVG"
 import { FirstFloorPins, ForthFloorPins, SecondFloorPins, ThirdFloorPins } from "./Lists/PinsLists"
 import { contentItems } from "./Lists/ContentLists"
-import { listItems, listItems1 } from "./Lists/AsideList"
+import { listItems } from "./Lists/AsideList"
 const ThreeDObject = () => {
     document.addEventListener("contextmenu", (event) => event.preventDefault())
     const [isSelected, setSelected] = useState("")
@@ -26,6 +26,7 @@ const ThreeDObject = () => {
     const handleHover = (event: React.MouseEvent<HTMLAnchorElement>) => {
         const ariaLabel = event.currentTarget.getAttribute("aria-label")
         const spaceData = event.currentTarget.getAttribute("data-space")
+        console.log(spaceData, ariaLabel)
     }
 
     const handleContentView = (index: string, level: string) => {
@@ -191,7 +192,10 @@ const ThreeDObject = () => {
                                             <a
                                                 key={index}
                                                 onMouseEnter={handleHover}
-                                                className={pin.aClass}
+                                                className={pin.dataSpace === isCurrentContent ? pin.aClass + " pin--active" : pin.aClass}
+                                                onClick={() => {
+                                                    openHandler(pin.dataSpace)
+                                                }}
                                                 data-category={pin.dataCategory}
                                                 data-space={pin.dataSpace}
                                                 href="#"
@@ -223,7 +227,10 @@ const ThreeDObject = () => {
                                             <a
                                                 key={index}
                                                 onMouseEnter={handleHover}
-                                                className={pin.aClass}
+                                                className={pin.dataSpace === isCurrentContent ? pin.aClass + " pin--active" : pin.aClass}
+                                                onClick={() => {
+                                                    openHandler(pin.dataSpace)
+                                                }}
                                                 data-category={pin.dataCategory}
                                                 data-space={pin.dataSpace}
                                                 href="#"
